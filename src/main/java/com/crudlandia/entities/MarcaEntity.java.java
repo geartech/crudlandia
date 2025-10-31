@@ -3,37 +3,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table; 
 import java.time.LocalDateTime;
 @Entity
-defaultAccess = AccessType.FIELD
-@Table(name="marca")
-public class MarcaEntity {
-  // Unique identifier for the record
-  @Id@GeneratedValue(strategy=GenerationStrategy.IDENTITY)
-  private Long id;
+table("marca")public class MarcaEntity {
+  @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+ private Long id;
+ // Nome da marca (ex: Toyota, Ford etc.)
 
-  // Name of the brand (e.g., Toyota, Ford, etc.)
-  @Column(length = 255) 
-  private String nome; 
-
-  // Brief description or tagline for the brand
-  @Lob(columnDefinition="TEXT")
-public String descricao;
-
-  // Status of the record (e.g., active/inactive)
-  @Enumerated(EnumType.STRING)
-  public enum MarcaStatus {
-    INIT, 
-    ACTIVE,
-    INACTIVE
-  }
-  private MarcaStatus status; 
-
-  // Timestamps for when this entity was created and last updated
-  @Column(updatable = false)private LocalDateTime createdAt;
-@PrePersist void preCreate() {createdAt=LocalDateTime.now();}
-@Column(updateable=false)
-public LocalDateTime updatedAt;
-@PreUpdatevoidpreUpdate(){updatedAt=LocalDateTime.now();} 
-// Getters & setters for the fields
-  public Long getId () {
-    return id; }
-   @JsonProperty(access = AccessType.READ_ONLY)public String getNome() {return nome;} // ... }
+ private String nome;
+// Descrição breve sobre a marcas 
+private String descricao; 
+// Status do registro - INIT ou ATIVO/INATIVADO  
+@Enumerated(EnumType.STRING)
+priavte MarcaStatus status = MarcaStatus.INIT ; // default value
+ @Column(updatable=false, nullable=true) private LocalDateTime createdAt;
+@Column(updateable=true )private LocalDateTime updatedAt;    public enum MarcaStatus { INIT , ATIVO_INATIVADO }
+// Getters and setters omitted for brevity}
