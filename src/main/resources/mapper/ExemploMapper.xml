@@ -4,12 +4,23 @@
 <mapper namespace="com.crudlandia.mappers.ExemploMapper">
 
 	<select id="listagemExemplo" resultType="com.crudlandia.dtos.ExemploDTO">
-        select * from exemplos
+        select 
+			ex.id,
+			ex.referenciaId,
+			ex.nome,
+			ex.descricao,
+			ex.sequencia,
+			ex.valor,
+			ex.peso,
+			ex.dthrEmissao,
+			ex.status,
+			ex.ativo
+        from exemplos ex
         where dthr_inicio <![CDATA[ >= ]]> #{dthrInicio}
         and dthr_fim <![CDATA[ <= ]]> #{dthrFim}
         
         <if test="nome != null">
-            and status = #{nome}
+            and nome = #{nome}
         </if>
         
         <if test="status != null">

@@ -26,12 +26,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.crudlandia.controllers.request.PesquisarExemploRequest;
-import com.crudlandia.controllers.request.SalvarExemploRequest;
+import com.crudlandia.controllers.request.PesquisarCadastroExemploRequest;
+import com.crudlandia.controllers.request.SalvarCadastroExemploRequest;
 import com.crudlandia.dtos.ExemploDTO;
 import com.crudlandia.enums.StatusEnum;
 import com.crudlandia.exceptions.ExemploNaoEncontradoException;
@@ -41,8 +41,8 @@ import com.crudlandia.services.exemplo.ExemploService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 
-@WebMvcTest(ExemploController.class)
-class ExemploControllerTest {
+@WebMvcTest(CadastroExemploController.class)
+class CadastroExemploControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -57,8 +57,8 @@ class ExemploControllerTest {
     private ExemploMapper exemploMapper;
 
     private ExemploDTO exemploDTO;
-    private SalvarExemploRequest salvarRequest;
-    private PesquisarExemploRequest pesquisarRequest;
+    private SalvarCadastroExemploRequest salvarRequest;
+    private PesquisarCadastroExemploRequest pesquisarRequest;
 
     @BeforeEach
     void setUp() {
@@ -75,7 +75,7 @@ class ExemploControllerTest {
         exemploDTO.setStatus(StatusEnum.ATIVO);
 
         // Preparar request de salvamento
-        salvarRequest = new SalvarExemploRequest();
+        salvarRequest = new SalvarCadastroExemploRequest();
         salvarRequest.setReferenciaId(10L);
         salvarRequest.setNome("Exemplo Teste");
         salvarRequest.setDescricao("Descrição do exemplo");
@@ -86,7 +86,7 @@ class ExemploControllerTest {
         salvarRequest.setStatus(StatusEnum.ATIVO);
 
         // Preparar request de pesquisa
-        pesquisarRequest = new PesquisarExemploRequest();
+        pesquisarRequest = new PesquisarCadastroExemploRequest();
         pesquisarRequest.setDthrInicio(LocalDate.of(2025, 1, 1));
         pesquisarRequest.setDthrFim(LocalDate.of(2025, 12, 31));
         pesquisarRequest.setNome("Teste");

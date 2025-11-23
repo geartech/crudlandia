@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PesquisarExemploRequest implements Serializable {
+public class PesquisarCadastroExemploRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull

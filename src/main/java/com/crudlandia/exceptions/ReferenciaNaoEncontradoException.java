@@ -1,7 +1,7 @@
 package com.crudlandia.exceptions;
 
 @ApiException("REFERENCIA_NAO_ENCONTRADO")
-public class ReferenciaNaoEncontradoException extends RuntimeException {
+public class ReferenciaNaoEncontradoException extends Exception {
     private static final long serialVersionUID = 1L;
 
     private Long id;

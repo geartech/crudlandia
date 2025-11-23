@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crudlandia.controllers.request.PesquisarExemploRequest;
-import com.crudlandia.controllers.request.SalvarExemploRequest;
+import com.crudlandia.controllers.request.PesquisarCadastroExemploRequest;
+import com.crudlandia.controllers.request.SalvarCadastroExemploRequest;
 import com.crudlandia.dtos.ExemploDTO;
+import com.crudlandia.exceptions.ExemploNaoEncontradoException;
+import com.crudlandia.exceptions.ExemploNomeDuplicadoException;
+import com.crudlandia.exceptions.ReferenciaNaoEncontradoException;
 import com.crudlandia.mappers.ExemploMapper;
 import com.crudlandia.services.exemplo.ExemploService;
 import com.github.pagehelper.PageHelper;
@@ -37,8 +40,8 @@ import com.github.pagehelper.PageInfo;
  * @since 2025-11-01
  */
 @RestController
-@RequestMapping("/api/exemplo")
-public class ExemploController {
+@RequestMapping("/cadastro/exemplo")
+public class CadastroExemploController {
 
     @Autowired
     private ExemploService exemploService;
@@ -62,7 +65,7 @@ public class ExemploController {
      *         não existir
      */
     @PostMapping("/criar")
-    public ResponseEntity<ExemploDTO> criar(@RequestBody SalvarExemploRequest request) {
+    public ResponseEntity<ExemploDTO> criar(@RequestBody SalvarCadastroExemploRequest request) throws ReferenciaNaoEncontradoException {
         ExemploDTO criado = exemploService.criar(request.getReferenciaId(), request.getNome(),
                 request.getDescricao(), request.getSequencia(), request.getValor(),
                 request.getPeso(), request.getDthrEmissao());
@@ -87,8 +90,8 @@ public class ExemploController {
      * @throws com.crudlandia.exceptions.ReferenciaNaoEncontradoException se a referência informada
      *         não existir
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<ExemploDTO> atualizar(@PathVariable Long id, @RequestBody SalvarExemploRequest request) {
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<ExemploDTO> atualizar(@PathVariable Long id, @RequestBody SalvarCadastroExemploRequest request) throws ExemploNaoEncontradoException, ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
         ExemploDTO atualizado = exemploService.atualizar(id, request.getReferenciaId(),
                 request.getNome(), request.getDescricao(), request.getSequencia(),
                 request.getValor(), request.getPeso(), request.getDthrEmissao());
@@ -103,8 +106,8 @@ public class ExemploController {
      * @throws com.crudlandia.exceptions.ExemploNaoEncontradoException se o exemplo não for
      *         encontrado
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable Long id) {
+    @GetMapping("/buscarPorId/{id}")
+    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable Long id) throws ExemploNaoEncontradoException {
         ExemploDTO dto = exemploService.buscarPorId(id);
         return ResponseEntity.ok(dto);
     }
@@ -120,8 +123,8 @@ public class ExemploController {
      * @param request objeto contendo os critérios de pesquisa e paginação
      * @return PageInfo contendo a lista paginada de ExemploDTO
      */
-    @GetMapping
-    public PageInfo<ExemploDTO> listagem(@RequestBody PesquisarExemploRequest request) {
+    @GetMapping("/listagem")
+    public PageInfo<ExemploDTO> listagem(@RequestBody PesquisarCadastroExemploRequest request) {
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         return new PageInfo<ExemploDTO>(exemploMapper.listagemExemplo(request.getDthrInicio(),
                 request.getDthrFim(), request.getNome(), request.getStatus(),
@@ -136,10 +139,16 @@ public class ExemploController {
      * @throws com.crudlandia.exceptions.ExemploNaoEncontradoException se o exemplo não for
      *         encontrado
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) throws ExemploNaoEncontradoException {
         exemploService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/desativar/{id}")
+    public ResponseEntity<Void> desativar(@PathVariable Long id) throws ExemploNaoEncontradoException {
+        exemploService.desativar(id);
+        return ResponseEntity.noContent().build();
+    }
+    
 }

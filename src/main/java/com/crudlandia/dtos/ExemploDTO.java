@@ -25,5 +25,6 @@ public class ExemploDTO implements Serializable {
 	private Double peso;
 	private LocalDateTime dthrEmissao;
 	private StatusEnum status;
+	private Boolean ativo;
 	
 }

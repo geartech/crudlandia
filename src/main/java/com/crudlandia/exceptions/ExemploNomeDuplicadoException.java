@@ -1,7 +1,7 @@
 package com.crudlandia.exceptions;
 
 @ApiException("EXEMPLO_NOME_DUPLICADO")
-public class ExemploNomeDuplicadoException extends RuntimeException {
+public class ExemploNomeDuplicadoException extends Exception {
     private static final long serialVersionUID = 1L;
 
     private Long idExistente;

@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.crudlandia.dtos.ExemploDTO;
+import com.crudlandia.exceptions.ExemploNaoEncontradoException;
+import com.crudlandia.exceptions.ExemploNomeDuplicadoException;
+import com.crudlandia.exceptions.ReferenciaNaoEncontradoException;
 
 /**
  * Interface de serviço para operações de negócio relacionadas a Exemplos.
@@ -45,7 +48,7 @@ public interface ExemploService {
      *         existir
      */
     public ExemploDTO criar(Long referenciaId, String nome, String descricao, Integer sequencia,
-            BigDecimal valor, Double peso, LocalDateTime dthrEmissao);
+            BigDecimal valor, Double peso, LocalDateTime dthrEmissao) throws ReferenciaNaoEncontradoException;
 
     /**
      * Atualiza um exemplo existente.
@@ -70,7 +73,7 @@ public interface ExemploService {
      *         existir
      */
     public ExemploDTO atualizar(Long id, Long referenciaId, String nome, String descricao,
-            Integer sequencia, BigDecimal valor, Double peso, LocalDateTime dthrEmissao);
+            Integer sequencia, BigDecimal valor, Double peso, LocalDateTime dthrEmissao) throws ExemploNaoEncontradoException, ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException;
 
     /**
      * Busca um exemplo por seu identificador único.
@@ -79,7 +82,7 @@ public interface ExemploService {
      * @return ExemploDTO com os dados do exemplo
      * @throws com.crudlandia.exceptions.ExemploNaoEncontradoException se o exemplo não existir
      */
-    public ExemploDTO buscarPorId(Long id);
+    public ExemploDTO buscarPorId(Long id) throws ExemploNaoEncontradoException;
 
     /**
      * Deleta um exemplo do sistema.
@@ -87,6 +90,9 @@ public interface ExemploService {
      * @param id identificador único do exemplo a ser deletado
      * @throws com.crudlandia.exceptions.ExemploNaoEncontradoException se o exemplo não existir
      */
-    public void deletar(Long id);
+    public void deletar(Long id) throws ExemploNaoEncontradoException;
 
+    public void desativar(Long id) throws ExemploNaoEncontradoException;
+    
+    
 }

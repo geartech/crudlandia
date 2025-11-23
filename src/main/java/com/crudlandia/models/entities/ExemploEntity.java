@@ -75,6 +75,9 @@ public class ExemploEntity extends BaseEntity {
 	@Column(name = "status", nullable = false, length = 20)
 	private StatusEnum status;
 
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo;
+	
 	/**
 	 * Converte a entidade para um DTO (Data Transfer Object).
 	 * 
@@ -87,7 +90,7 @@ public class ExemploEntity extends BaseEntity {
 	 */
 	public ExemploDTO getDRO() {
 		return new ExemploDTO(this.id, id(this.referencia), this.nome, this.descricao,
-				this.sequencia, this.valor, this.peso, this.dthrEmissao, this.status);
+				this.sequencia, this.valor, this.peso, this.dthrEmissao, this.status, this.ativo);
 	}
 
 	public Long getId() {
@@ -160,6 +163,14 @@ public class ExemploEntity extends BaseEntity {
 
 	public void setStatus(StatusEnum status) {
 		this.status = status;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

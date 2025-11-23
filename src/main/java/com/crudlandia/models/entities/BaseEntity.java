@@ -44,7 +44,7 @@ public abstract class BaseEntity {
 
     @CreatedBy
     @Column(name = "criadoPor", updatable = false)
-    private String creadoPor;
+    private String criadoPor;
 
     @CreatedDate
     @LastModifiedDate
@@ -68,15 +68,15 @@ public abstract class BaseEntity {
         this.dthrCriacao = dthrCriacao;
     }
 
-    public String getCreadoPor() {
-        return creadoPor;
-    }
+    public String getCriadoPor() {
+		return criadoPor;
+	}
 
-    public void setCreadoPor(String creadoPor) {
-        this.creadoPor = creadoPor;
-    }
+	public void setCriadoPor(String criadoPor) {
+		this.criadoPor = criadoPor;
+	}
 
-    public LocalDateTime getDthrAtualizacao() {
+	public LocalDateTime getDthrAtualizacao() {
         return dthrAtualizacao;
     }
 
