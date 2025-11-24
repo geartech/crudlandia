@@ -22,8 +22,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.crudlandia.controllers.request.PesquisarCadastroExemploRequest;
-import com.crudlandia.controllers.request.SalvarCadastroExemploRequest;
+import com.crudlandia.controllers.exemplo.request.PesquisarCadastroExemploRequest;
+import com.crudlandia.controllers.exemplo.request.SalvarCadastroExemploRequest;
 import com.crudlandia.dtos.ExemploDTO;
 import com.crudlandia.enums.StatusEnum;
 import com.crudlandia.models.entities.ReferenciaEntity;

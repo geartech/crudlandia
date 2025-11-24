@@ -1,4 +1,4 @@
-package com.crudlandia.controllers;
+package com.crudlandia.controllers.exemplo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crudlandia.controllers.request.PesquisarCadastroExemploRequest;
-import com.crudlandia.controllers.request.SalvarCadastroExemploRequest;
+import com.crudlandia.controllers.exemplo.request.PesquisarCadastroExemploRequest;
+import com.crudlandia.controllers.exemplo.request.SalvarCadastroExemploRequest;
 import com.crudlandia.dtos.ExemploDTO;
 import com.crudlandia.exceptions.ExemploNaoEncontradoException;
 import com.crudlandia.exceptions.ExemploNomeDuplicadoException;

@@ -1,4 +1,4 @@
-package com.crudlandia.controllers.request;
+package com.crudlandia.controllers.exemplo.request;
 
 import java.io.Serializable;
 import java.time.LocalDate;
