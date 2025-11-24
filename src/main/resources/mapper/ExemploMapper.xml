@@ -6,25 +6,25 @@
 	<select id="listagemExemplo" resultType="com.crudlandia.dtos.ExemploDTO">
         select 
 			ex.id,
-			ex.referenciaId,
+			ex.referencia_id as referenciaId,
 			ex.nome,
 			ex.descricao,
 			ex.sequencia,
 			ex.valor,
 			ex.peso,
-			ex.dthrEmissao,
+			ex.dthr_emissao as dthrEmissao,
 			ex.status,
 			ex.ativo
         from exemplos ex
-        where dthr_inicio <![CDATA[ >= ]]> #{dthrInicio}
-        and dthr_fim <![CDATA[ <= ]]> #{dthrFim}
+        where ex.dthr_emissao <![CDATA[ >= ]]> #{dthrInicio}
+        and ex.dthr_emissao <![CDATA[ <= ]]> #{dthrFim}
         
         <if test="nome != null">
-            and nome = #{nome}
+            and ex.nome like CONCAT('%', #{nome}, '%')
         </if>
         
         <if test="status != null">
-            and status = #{status}
+            and ex.status = #{status}
         </if>
         
         <if test="columnType != null">

@@ -63,9 +63,12 @@ public class CadastroExemploController {
      *         mesmo nome
      * @throws com.crudlandia.exceptions.ReferenciaNaoEncontradoException se a referência informada
      *         não existir
+     * @throws com.crudlandia.exceptions.ExemploNomeDuplicadoException se já existir exemplo com o
+     *         mesmo nome
      */
     @PostMapping("/criar")
-    public ResponseEntity<ExemploDTO> criar(@RequestBody SalvarCadastroExemploRequest request) throws ReferenciaNaoEncontradoException {
+    public ResponseEntity<ExemploDTO> criar(@RequestBody SalvarCadastroExemploRequest request)
+            throws ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
         ExemploDTO criado = exemploService.criar(request.getReferenciaId(), request.getNome(),
                 request.getDescricao(), request.getSequencia(), request.getValor(),
                 request.getPeso(), request.getDthrEmissao());
@@ -91,7 +94,9 @@ public class CadastroExemploController {
      *         não existir
      */
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<ExemploDTO> atualizar(@PathVariable Long id, @RequestBody SalvarCadastroExemploRequest request) throws ExemploNaoEncontradoException, ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
+    public ResponseEntity<ExemploDTO> atualizar(@PathVariable Long id,
+            @RequestBody SalvarCadastroExemploRequest request) throws ExemploNaoEncontradoException,
+            ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
         ExemploDTO atualizado = exemploService.atualizar(id, request.getReferenciaId(),
                 request.getNome(), request.getDescricao(), request.getSequencia(),
                 request.getValor(), request.getPeso(), request.getDthrEmissao());
@@ -107,7 +112,8 @@ public class CadastroExemploController {
      *         encontrado
      */
     @GetMapping("/buscarPorId/{id}")
-    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable Long id) throws ExemploNaoEncontradoException {
+    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable Long id)
+            throws ExemploNaoEncontradoException {
         ExemploDTO dto = exemploService.buscarPorId(id);
         return ResponseEntity.ok(dto);
     }
@@ -123,7 +129,7 @@ public class CadastroExemploController {
      * @param request objeto contendo os critérios de pesquisa e paginação
      * @return PageInfo contendo a lista paginada de ExemploDTO
      */
-    @GetMapping("/listagem")
+    @PostMapping("/listagem")
     public PageInfo<ExemploDTO> listagem(@RequestBody PesquisarCadastroExemploRequest request) {
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         return new PageInfo<ExemploDTO>(exemploMapper.listagemExemplo(request.getDthrInicio(),
@@ -140,15 +146,17 @@ public class CadastroExemploController {
      *         encontrado
      */
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) throws ExemploNaoEncontradoException {
+    public ResponseEntity<Void> deletar(@PathVariable Long id)
+            throws ExemploNaoEncontradoException {
         exemploService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/desativar/{id}")
-    public ResponseEntity<Void> desativar(@PathVariable Long id) throws ExemploNaoEncontradoException {
+    public ResponseEntity<Void> desativar(@PathVariable Long id)
+            throws ExemploNaoEncontradoException {
         exemploService.desativar(id);
         return ResponseEntity.noContent().build();
     }
-    
+
 }

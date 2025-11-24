@@ -52,13 +52,19 @@ public class ExemploServiceImpl implements ExemploService {
      * Implementação que valida nome único, busca a referência no banco, e define status ATIVO
      * automaticamente na criação.
      * </p>
-     * @throws ReferenciaNaoEncontradoException 
+     * 
+     * @throws ReferenciaNaoEncontradoException
+     * @throws ExemploNomeDuplicadoException
      */
     public ExemploDTO criar(Long referenciaId, String nome, String descricao, Integer sequencia,
-            BigDecimal valor, Double peso, LocalDateTime dthrEmissao) throws ReferenciaNaoEncontradoException {
+            BigDecimal valor, Double peso, LocalDateTime dthrEmissao)
+            throws ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
 
         // Validar se já existe exemplo com o mesmo nome
-        exemploRepository.findByNome(nome).ifPresent(exemplo -> new ExemploNomeDuplicadoException(nome, exemplo.getId()));
+        Optional<ExemploEntity> exemploExistente = exemploRepository.findByNome(nome);
+        if (exemploExistente.isPresent()) {
+            throw new ExemploNomeDuplicadoException(nome, exemploExistente.get().getId());
+        }
 
         ReferenciaEntity referencia = referenciaRepository.findById(referenciaId)
                 .orElseThrow(() -> new ReferenciaNaoEncontradoException(referenciaId));
@@ -74,6 +80,7 @@ public class ExemploServiceImpl implements ExemploService {
 
         // Status sempre ATIVO na criação
         entity.setStatus(StatusEnum.ATIVO);
+        entity.setAtivo(true);
 
         ExemploEntity saved = exemploRepository.save(entity);
         return saved.getDRO();
@@ -86,13 +93,15 @@ public class ExemploServiceImpl implements ExemploService {
      * Implementação que valida se o exemplo existe, verifica duplicidade de nome com outros
      * exemplos, e atualiza todos os campos.
      * </p>
-     * @throws ExemploNaoEncontradoException 
-     * @throws ReferenciaNaoEncontradoException 
-     * @throws ExemploNomeDuplicadoException 
+     * 
+     * @throws ExemploNaoEncontradoException
+     * @throws ReferenciaNaoEncontradoException
+     * @throws ExemploNomeDuplicadoException
      */
     public ExemploDTO atualizar(Long id, Long referenciaId, String nome, String descricao,
-            Integer sequencia, BigDecimal valor, Double peso, LocalDateTime dthrEmissao) throws ExemploNaoEncontradoException, 
-    		ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
+            Integer sequencia, BigDecimal valor, Double peso, LocalDateTime dthrEmissao)
+            throws ExemploNaoEncontradoException, ReferenciaNaoEncontradoException,
+            ExemploNomeDuplicadoException {
 
         ExemploEntity entity = exemploRepository.findById(id)
                 .orElseThrow(() -> new ExemploNaoEncontradoException(id));
@@ -100,12 +109,12 @@ public class ExemploServiceImpl implements ExemploService {
         // Validar se já existe outro exemplo com o mesmo nome
         Optional<ExemploEntity> exemploExistente = exemploRepository.findByNome(nome);
         if (exemploExistente.isPresent()) {
-        	if (!exemploExistente.get().getId().equals(id)) {
+            if (!exemploExistente.get().getId().equals(id)) {
                 throw new ExemploNomeDuplicadoException(nome, exemploExistente.get().getId());
-             }	
+            }
         }
-        
-       
+
+
 
         ReferenciaEntity referencia = referenciaRepository.findById(referenciaId)
                 .orElseThrow(() -> new ReferenciaNaoEncontradoException(referenciaId));
@@ -124,10 +133,12 @@ public class ExemploServiceImpl implements ExemploService {
 
     /**
      * {@inheritDoc}
-     * @throws ExemploNaoEncontradoException 
+     * 
+     * @throws ExemploNaoEncontradoException
      */
     public ExemploDTO buscarPorId(Long id) throws ExemploNaoEncontradoException {
-        ExemploEntity entity = exemploRepository.findById(id).orElseThrow(() -> new ExemploNaoEncontradoException(id));
+        ExemploEntity entity = exemploRepository.findById(id)
+                .orElseThrow(() -> new ExemploNaoEncontradoException(id));
         return entity.getDRO();
     }
 
@@ -137,18 +148,21 @@ public class ExemploServiceImpl implements ExemploService {
      * <p>
      * Implementação que valida se o exemplo existe antes de deletar.
      * </p>
-     * @throws ExemploNaoEncontradoException 
+     * 
+     * @throws ExemploNaoEncontradoException
      */
     public void deletar(Long id) throws ExemploNaoEncontradoException {
-        ExemploEntity entity = exemploRepository.findById(id).orElseThrow(() -> new ExemploNaoEncontradoException(id));
+        ExemploEntity entity = exemploRepository.findById(id)
+                .orElseThrow(() -> new ExemploNaoEncontradoException(id));
         exemploRepository.delete(entity);
     }
-    
+
 
     public void desativar(Long id) throws ExemploNaoEncontradoException {
-        ExemploEntity entity = exemploRepository.findById(id).orElseThrow(() -> new ExemploNaoEncontradoException(id));
+        ExemploEntity entity = exemploRepository.findById(id)
+                .orElseThrow(() -> new ExemploNaoEncontradoException(id));
         entity.setStatus(StatusEnum.INATIVO);
     }
-    
+
 
 }
