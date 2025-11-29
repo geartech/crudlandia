@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crudlandia.mappers.ProdutoMapper">
+    <select id="listagemProduto" resultType="com.crudlandia.dtos.ProdutoDTO">
+        SELECT
+            id,
+            codigo,
+            nome,
+            valor,
+            marca,
+            validade,
+            ativo
+        FROM produtos
+        WHERE 1=1
+        <if test="dthrInicio != null and dthrFim != null">
+            AND validade BETWEEN #{dthrInicio} AND #{dthrFim}
+        </if>
+        <if test="nome != null and nome != ''">
+            AND LOWER(nome) LIKE CONCAT('%', LOWER(#{nome}), '%')
+        </if>
+        <if test="valorMinimo != null">
+            AND valor &gt;= #{valorMinimo}
+        </if>
+        <if test="valorMaximo != null">
+            AND valor &lt;= #{valorMaximo}
+        </if>
+        <if test="marca != null and marca != ''">
+            AND LOWER(marca) LIKE CONCAT('%', LOWER(#{marca}), '%')
+        </if>
+        <if test="ativo != null">
+            AND ativo = #{ativo}
+        </if>
+        ORDER BY ${columnType} ${orderType}
+    </select>
+</mapper>
