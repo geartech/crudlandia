@@ -103,7 +103,7 @@ class CadastroExemploControllerTest {
         }
 
         @Test
-        @DisplayName("Deve retornar erro 409 ao tentar criar exemplo com nome duplicado")
+        @DisplayName("Deve retornar erro 500 ao tentar criar exemplo com nome duplicado")
         void deveRetornarErroAoCriarComNomeDuplicado() throws Exception {
                 // Criar primeiro exemplo
                 mockMvc.perform(post("/cadastro/exemplo/criar")
@@ -115,8 +115,9 @@ class CadastroExemploControllerTest {
                 mockMvc.perform(post("/cadastro/exemplo/criar")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(salvarRequest)))
-                                .andExpect(status().isConflict())
-                                .andExpect(jsonPath("$.status").value(409));
+                                .andExpect(status().isInternalServerError())
+                                .andExpect(jsonPath("$.status").value(500))
+                                .andExpect(jsonPath("$.message").value("EXEMPLO_NOME_DUPLICADO"));
         }
 
         @Test
@@ -142,17 +143,18 @@ class CadastroExemploControllerTest {
         }
 
         @Test
-        @DisplayName("Deve retornar erro 404 ao tentar atualizar exemplo inexistente")
+        @DisplayName("Deve retornar erro 500 ao tentar atualizar exemplo inexistente")
         void deveRetornarErroAoAtualizarExemploInexistente() throws Exception {
                 mockMvc.perform(put("/cadastro/exemplo/atualizar/{id}", 999L)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(salvarRequest)))
-                                .andExpect(status().isNotFound())
-                                .andExpect(jsonPath("$.status").value(404));
+                                .andExpect(status().isInternalServerError())
+                                .andExpect(jsonPath("$.status").value(500))
+                                .andExpect(jsonPath("$.message").value("EXEMPLO_NAO_ENCONTRADO"));
         }
 
         @Test
-        @DisplayName("Deve retornar erro 409 ao tentar atualizar com nome duplicado")
+        @DisplayName("Deve retornar erro 500 ao tentar atualizar com nome duplicado")
         void deveRetornarErroAoAtualizarComNomeDuplicado() throws Exception {
                 // Criar dois exemplos
                 String createResponse1 = mockMvc
@@ -181,8 +183,9 @@ class CadastroExemploControllerTest {
                 mockMvc.perform(put("/cadastro/exemplo/atualizar/{id}", exemplo2.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(salvarRequest)))
-                                .andExpect(status().isConflict())
-                                .andExpect(jsonPath("$.status").value(409));
+                                .andExpect(status().isInternalServerError())
+                                .andExpect(jsonPath("$.status").value(500))
+                                .andExpect(jsonPath("$.message").value("EXEMPLO_NOME_DUPLICADO"));
         }
 
         @Test
@@ -206,11 +209,12 @@ class CadastroExemploControllerTest {
         }
 
         @Test
-        @DisplayName("Deve retornar erro 404 ao buscar exemplo inexistente")
+        @DisplayName("Deve retornar erro 500 ao buscar exemplo inexistente")
         void deveRetornarErroAoBuscarExemploInexistente() throws Exception {
                 mockMvc.perform(get("/cadastro/exemplo/buscarPorId/{id}", 999L))
-                                .andExpect(status().isNotFound())
-                                .andExpect(jsonPath("$.status").value(404));
+                                .andExpect(status().isInternalServerError())
+                                .andExpect(jsonPath("$.status").value(500))
+                                .andExpect(jsonPath("$.message").value("EXEMPLO_NAO_ENCONTRADO"));
         }
 
         @Test
@@ -249,11 +253,12 @@ class CadastroExemploControllerTest {
         }
 
         @Test
-        @DisplayName("Deve retornar erro 404 ao tentar deletar exemplo inexistente")
+        @DisplayName("Deve retornar erro 500 ao tentar deletar exemplo inexistente")
         void deveRetornarErroAoDeletarExemploInexistente() throws Exception {
                 mockMvc.perform(delete("/cadastro/exemplo/deletar/{id}", 999L))
-                                .andExpect(status().isNotFound())
-                                .andExpect(jsonPath("$.status").value(404));
+                                .andExpect(status().isInternalServerError())
+                                .andExpect(jsonPath("$.status").value(500))
+                                .andExpect(jsonPath("$.message").value("EXEMPLO_NAO_ENCONTRADO"));
         }
 
         @Test

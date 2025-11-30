@@ -94,7 +94,7 @@ public class CadastroExemploController {
      *         não existir
      */
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<ExemploDTO> atualizar(@PathVariable Long id,
+    public ResponseEntity<ExemploDTO> atualizar(@PathVariable("id") Long id,
             @RequestBody SalvarCadastroExemploRequest request) throws ExemploNaoEncontradoException,
             ReferenciaNaoEncontradoException, ExemploNomeDuplicadoException {
         ExemploDTO atualizado = exemploService.atualizar(id, request.getReferenciaId(),
@@ -112,7 +112,7 @@ public class CadastroExemploController {
      *         encontrado
      */
     @GetMapping("/buscarPorId/{id}")
-    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable Long id)
+    public ResponseEntity<ExemploDTO> buscarPorId(@PathVariable("id") Long id)
             throws ExemploNaoEncontradoException {
         ExemploDTO dto = exemploService.buscarPorId(id);
         return ResponseEntity.ok(dto);
@@ -146,14 +146,14 @@ public class CadastroExemploController {
      *         encontrado
      */
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id)
+    public ResponseEntity<Void> deletar(@PathVariable("id") Long id)
             throws ExemploNaoEncontradoException {
         exemploService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/desativar/{id}")
-    public ResponseEntity<Void> desativar(@PathVariable Long id)
+    public ResponseEntity<Void> desativar(@PathVariable("id") Long id)
             throws ExemploNaoEncontradoException {
         exemploService.desativar(id);
         return ResponseEntity.noContent().build();

@@ -13,30 +13,30 @@ import org.springframework.web.context.request.WebRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ExemploNaoEncontradoException.class)
-    public ResponseEntity<Map<String, Object>> handleExemploNaoEncontrado(
-            ExemploNaoEncontradoException ex, WebRequest request) {
+    /**
+     * Trata todas as exceções anotadas com @ApiException Retorna status 500 com a string da
+     * anotação como mensagem
+     */
+    @ExceptionHandler({ExemploNaoEncontradoException.class, ExemploNomeDuplicadoException.class,
+            ReferenciaNaoEncontradoException.class})
+    public ResponseEntity<Map<String, Object>> handleApiException(Exception ex,
+            WebRequest request) {
+        String message = ex.getClass().getSimpleName();
+
+        // Obtém o valor da anotação @ApiException
+        if (ex.getClass().isAnnotationPresent(ApiException.class)) {
+            ApiException annotation = ex.getClass().getAnnotation(ApiException.class);
+            message = annotation.value();
+        }
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "Not Found");
-        body.put("message", ex.getMessage());
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", "Internal Server Error");
+        body.put("message", message);
         body.put("path", request.getDescription(false).replace("uri=", ""));
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
-    }
-
-    @ExceptionHandler(ExemploNomeDuplicadoException.class)
-    public ResponseEntity<Map<String, Object>> handleExemploNomeDuplicado(
-            ExemploNomeDuplicadoException ex, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.CONFLICT.value());
-        body.put("error", "Conflict");
-        body.put("message", ex.getMessage());
-        body.put("path", request.getDescription(false).replace("uri=", ""));
-
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
 
     @ExceptionHandler(Exception.class)
