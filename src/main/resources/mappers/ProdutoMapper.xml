@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crudlandia.mappers.ProdutoMapper">
+
+    <select id="listagemProdutos" resultType="com.crudlandia.dtos.ProdutoDTO">
+        SELECT
+            id,
+            codigo,
+            nome,
+            valor,
+            marca,
+            validade,
+            ativo
+        FROM produtos
+        <where>
+            ativo = true
+            <if test="codigo != null and codigo != ''">
+                AND LOWER(codigo) LIKE CONCAT('%', LOWER(#{codigo}), '%')
+            </if>
+            <if test="nome != null and nome != ''">
+                AND LOWER(nome) LIKE CONCAT('%', LOWER(#{nome}), '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
