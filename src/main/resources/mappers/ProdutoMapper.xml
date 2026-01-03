@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crudlandia.mappers.IProdutoMapper">
+	<select id="listagemProduto" resultType="com.crudlandia.dtos.ProdutoDTO">
+		select
+			pr.id,
+			pr.codigo,
+			pr.nome,
+			pr.valor,
+			pr.marca,
+			pr.validade,
+			pr.ativo
+		from produtos pr
+		where 1=1
+
+		<if test="codigo != null">
+			and pr.codigo like CONCAT('%', #{codigo}, '%')
+		</if>
+
+		<if test="nome != null">
+			and pr.nome like CONCAT('%', #{nome}, '%')
+		</if>
+
+		<if test="ativo != null">
+			and pr.ativo = #{ativo}
+		</if>
+
+		<if test="columnType != null">
+			order by ${columnType} ${orderType}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,146 @@
+{
+  "StatusEnum" : {
+    "className" : "StatusEnum",
+    "packageName" : "com.crudlandia.enums",
+    "fullyQualifiedName" : "com.crudlandia.enums.StatusEnum",
+    "type" : "ENUM",
+    "filePath" : "main/java/com/crudlandia/enums/StatusEnum.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "ExemploEntity" : {
+    "className" : "ExemploEntity",
+    "packageName" : "com.crudlandia.models.entities",
+    "fullyQualifiedName" : "com.crudlandia.models.entities.ExemploEntity",
+    "type" : "ENTITY",
+    "filePath" : "main/java/com/crudlandia/models/entities/ExemploEntity.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "GlobalExceptionHandler" : {
+    "className" : "GlobalExceptionHandler",
+    "packageName" : "com.crudlandia.exceptions",
+    "fullyQualifiedName" : "com.crudlandia.exceptions.GlobalExceptionHandler",
+    "type" : "CONTROLLER",
+    "filePath" : "main/java/com/crudlandia/exceptions/GlobalExceptionHandler.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "CadastroExemploController" : {
+    "className" : "CadastroExemploController",
+    "packageName" : "com.crudlandia.controllers.exemplo",
+    "fullyQualifiedName" : "com.crudlandia.controllers.exemplo.CadastroExemploController",
+    "type" : "CONTROLLER",
+    "filePath" : "main/java/com/crudlandia/controllers/exemplo/CadastroExemploController.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 466399900 ]
+  },
+  "ReferenciaEntity" : {
+    "className" : "ReferenciaEntity",
+    "packageName" : "com.crudlandia.models.entities",
+    "fullyQualifiedName" : "com.crudlandia.models.entities.ReferenciaEntity",
+    "type" : "ENTITY",
+    "filePath" : "main/java/com/crudlandia/models/entities/ReferenciaEntity.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "ExemploDTO" : {
+    "className" : "ExemploDTO",
+    "packageName" : "com.crudlandia.dtos",
+    "fullyQualifiedName" : "com.crudlandia.dtos.ExemploDTO",
+    "type" : "DTO",
+    "filePath" : "main/java/com/crudlandia/dtos/ExemploDTO.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 466399900 ]
+  },
+  "ReferenciaNaoEncontradoException" : {
+    "className" : "ReferenciaNaoEncontradoException",
+    "packageName" : "com.crudlandia.exceptions",
+    "fullyQualifiedName" : "com.crudlandia.exceptions.ReferenciaNaoEncontradoException",
+    "type" : "EXCEPTION",
+    "filePath" : "main/java/com/crudlandia/exceptions/ReferenciaNaoEncontradoException.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "ExemploNaoEncontradoException" : {
+    "className" : "ExemploNaoEncontradoException",
+    "packageName" : "com.crudlandia.exceptions",
+    "fullyQualifiedName" : "com.crudlandia.exceptions.ExemploNaoEncontradoException",
+    "type" : "EXCEPTION",
+    "filePath" : "main/java/com/crudlandia/exceptions/ExemploNaoEncontradoException.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "BaseEntity" : {
+    "className" : "BaseEntity",
+    "packageName" : "com.crudlandia.models.entities",
+    "fullyQualifiedName" : "com.crudlandia.models.entities.BaseEntity",
+    "type" : "ENTITY",
+    "filePath" : "main/java/com/crudlandia/models/entities/BaseEntity.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 484933800 ]
+  },
+  "ExemploServiceImpl" : {
+    "className" : "ExemploServiceImpl",
+    "packageName" : "com.crudlandia.services.exemplo",
+    "fullyQualifiedName" : "com.crudlandia.services.exemplo.ExemploServiceImpl",
+    "type" : "SERVICE",
+    "filePath" : "main/java/com/crudlandia/services/exemplo/ExemploServiceImpl.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "ExemploRepository" : {
+    "className" : "ExemploRepository",
+    "packageName" : "com.crudlandia.models.repository",
+    "fullyQualifiedName" : "com.crudlandia.models.repository.ExemploRepository",
+    "type" : "REPOSITORY",
+    "filePath" : "main/java/com/crudlandia/models/repository/ExemploRepository.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "PesquisarCadastroExemploRequest" : {
+    "className" : "PesquisarCadastroExemploRequest",
+    "packageName" : "com.crudlandia.controllers.exemplo.request",
+    "fullyQualifiedName" : "com.crudlandia.controllers.exemplo.request.PesquisarCadastroExemploRequest",
+    "type" : "DTO_REQUEST",
+    "filePath" : "main/java/com/crudlandia/controllers/exemplo/request/PesquisarCadastroExemploRequest.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 466399900 ]
+  },
+  "ExemploMapper" : {
+    "className" : "ExemploMapper",
+    "packageName" : "com.crudlandia.mappers",
+    "fullyQualifiedName" : "com.crudlandia.mappers.ExemploMapper",
+    "type" : "IMAPPER",
+    "filePath" : "main/java/com/crudlandia/mappers/ExemploMapper.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "ReferenciaRepository" : {
+    "className" : "ReferenciaRepository",
+    "packageName" : "com.crudlandia.models.repository",
+    "fullyQualifiedName" : "com.crudlandia.models.repository.ReferenciaRepository",
+    "type" : "REPOSITORY",
+    "filePath" : "main/java/com/crudlandia/models/repository/ReferenciaRepository.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "ExemploNomeDuplicadoException" : {
+    "className" : "ExemploNomeDuplicadoException",
+    "packageName" : "com.crudlandia.exceptions",
+    "fullyQualifiedName" : "com.crudlandia.exceptions.ExemploNomeDuplicadoException",
+    "type" : "EXCEPTION",
+    "filePath" : "main/java/com/crudlandia/exceptions/ExemploNomeDuplicadoException.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  },
+  "ExemploService" : {
+    "className" : "ExemploService",
+    "packageName" : "com.crudlandia.services.exemplo",
+    "fullyQualifiedName" : "com.crudlandia.services.exemplo.ExemploService",
+    "type" : "ISERVICE",
+    "filePath" : "main/java/com/crudlandia/services/exemplo/ExemploService.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 485789700 ]
+  },
+  "SalvarCadastroExemploRequest" : {
+    "className" : "SalvarCadastroExemploRequest",
+    "packageName" : "com.crudlandia.controllers.exemplo.request",
+    "fullyQualifiedName" : "com.crudlandia.controllers.exemplo.request.SalvarCadastroExemploRequest",
+    "type" : "DTO_REQUEST",
+    "filePath" : "main/java/com/crudlandia/controllers/exemplo/request/SalvarCadastroExemploRequest.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 466399900 ]
+  },
+  "ApiException" : {
+    "className" : "ApiException",
+    "packageName" : "com.crudlandia.exceptions",
+    "fullyQualifiedName" : "com.crudlandia.exceptions.ApiException",
+    "type" : "EXCEPTION",
+    "filePath" : "main/java/com/crudlandia/exceptions/ApiException.java",
+    "createdAt" : [ 2026, 1, 3, 14, 51, 52, 482052600 ]
+  }
+}
